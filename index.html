@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prestige Realty — Luxury Properties</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- EmailJS — sends form data directly to your inbox, no backend needed -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar"></div>
+
+  <!-- DOT NAV (built by JS) -->
+  <nav id="dot-nav" aria-label="Section navigation"></nav>
+
+  <!-- TOP NAV -->
+  <header id="main-nav" role="banner">
+    <a href="#" class="nav-logo" data-panel="0">Prestige Realty</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#" data-panel="0">Home</a></li>
+      <li><a href="#" data-panel="1">Stats</a></li>
+      <li><a href="#" data-panel="2">Coming Soon</a></li>
+      <li><a href="#" data-panel="3">About</a></li>
+      <li><a href="#" data-panel="4">Team</a></li>
+      <li><a href="#" data-panel="5">Contact</a></li>
+    </ul>
+    <button class="nav-cta" data-panel="5">Enquire</button>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       SNAP CONTAINER
+       All panels live inside here.
+       Scroll-snap moves between them.
+       ══════════════════════════════════════ -->
+  <div id="snap-wrap">
+
+    <!-- ▌PANEL 0 — HERO ▐ -->
+    <section class="panel" id="p-home" aria-label="Hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-orb orb1" id="orb1"></div>
+      <div class="hero-orb orb2" id="orb2"></div>
+      <div class="hero-orb orb3" id="orb3"></div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">Curated Luxury Properties</p>
+        <h1 class="hero-title">
+          Where Exceptional<br>
+          <em>Homes Find</em><br>
+          Their Owners
+        </h1>
+        <p class="hero-sub">
+          We represent the finest residential and commercial properties —
+          selected with discernment, presented with care.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" data-panel="2">View Coming Soon</button>
+          <button class="btn-outline"  data-panel="5">Book a Consultation</button>
+        </div>
+      </div>
+
+      <div class="hero-scroll-hint" aria-hidden="true">Scroll</div>
+    </section>
+
+    <!-- ▌PANEL 1 — STATS ▐ -->
+    <section class="panel" id="p-stats" aria-label="Company statistics">
+      <p class="stats-eyebrow r-up">By the Numbers</p>
+      <h2 class="stats-title r-up d1">A Record of <em>Excellence</em></h2>
+      <div class="stats-grid">
+        <div class="stat-box r-up d1">
+          <div class="stat-num">$2.4B</div>
+          <div class="stat-label">Properties Sold</div>
+        </div>
+        <div class="stat-box r-up d2">
+          <div class="stat-num">480+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-box r-up d3">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+        <div class="stat-box r-up d4">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▌PANEL 2 — COMING SOON ▐ -->
+    <section class="panel" id="p-listings" aria-label="Coming soon">
+      <div class="cs-bg"></div>
+      <div class="cs-orb cs-orb1"></div>
+      <div class="cs-orb cs-orb2"></div>
+
+      <div class="cs-content">
+        <div class="cs-badge r-up">Something Exceptional Is Coming</div>
+        <h2 class="cs-title r-up d1">
+          Our First <em>Curated</em><br>Properties Are on the Way
+        </h2>
+        <p class="cs-desc r-up d2">
+          We're hand-selecting only the finest residential and commercial properties
+          to bring to market. Be the first to know when our listings go live.
+        </p>
+
+        <div class="cs-form r-up d3" id="cs-form">
+          <div class="cs-input-row">
+            <input id="wl-name"  type="text"  placeholder="Your name"          autocomplete="name" />
+            <input id="wl-email" type="email" placeholder="Your email address"  autocomplete="email" />
+            <button class="cs-btn" onclick="joinWaitlist()"><span>Notify Me</span></button>
+          </div>
+          <p class="cs-privacy">We respect your privacy — no spam, ever.</p>
+        </div>
+        <div class="cs-success" id="cs-success">
+          ✦ You're on the list — we'll be in touch the moment our first properties go live.
+        </div>
+
+        <div class="cs-teaser r-up d4">
+          <div class="cs-teaser-card"><div class="cs-teaser-icon">🏙️</div><div class="cs-teaser-label">Prestige Residences</div></div>
+          <div class="cs-teaser-card"><div class="cs-teaser-icon">🌊</div><div class="cs-teaser-label">Waterfront Estates</div></div>
+          <div class="cs-teaser-card"><div class="cs-teaser-icon">🏢</div><div class="cs-teaser-label">Commercial Spaces</div></div>
+          <div class="cs-teaser-card"><div class="cs-teaser-icon">🌿</div><div class="cs-teaser-label">Garden Retreats</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▌PANEL 3 — ABOUT ▐ -->
+    <section class="panel" id="p-about" aria-label="About us">
+      <div class="about-grid">
+
+        <div class="r-left">
+          <span class="eyebrow eyebrow--light">Our Philosophy</span>
+          <h2 class="section-title" style="color:var(--white)">
+            More Than <em>Real Estate —</em><br>A Legacy of Trust
+          </h2>
+          <div class="divider-line"></div>
+          <p class="section-desc section-desc--light">
+            We believe a home is more than a transaction. Every property we represent
+            carries a story, and every client we serve deserves our full attention,
+            expertise, and dedication.
+          </p>
+          <div class="about-values">
+            <div class="about-val r-up d1">
+              <div class="about-icon">◈</div>
+              <div>
+                <h4>Curated Selection</h4>
+                <p>We list only properties that meet our rigorous standards for quality, location, and investment potential.</p>
+              </div>
+            </div>
+            <div class="about-val r-up d2">
+              <div class="about-icon">◇</div>
+              <div>
+                <h4>White-Glove Service</h4>
+                <p>From first inquiry to settlement, a dedicated advisor is available at every step of the journey.</p>
+              </div>
+            </div>
+            <div class="about-val r-up d3">
+              <div class="about-icon">◉</div>
+              <div>
+                <h4>Market Intelligence</h4>
+                <p>Backed by decades of data and local expertise to help you make confident, informed decisions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-stats r-right">
+          <div class="about-stat r-scale d1">
+            <div class="about-stat-num">15+</div>
+            <div class="about-stat-label">Cities Covered</div>
+          </div>
+          <div class="about-stat r-scale d2">
+            <div class="about-stat-num">320</div>
+            <div class="about-stat-label">Active Listings</div>
+          </div>
+          <div class="about-stat r-scale d3">
+            <div class="about-stat-num">48h</div>
+            <div class="about-stat-label">Avg. Response</div>
+          </div>
+          <div class="about-stat r-scale d4">
+            <div class="about-stat-num">5★</div>
+            <div class="about-stat-label">Average Rating</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ▌PANEL 4 — TEAM (inner scroll) ▐ -->
+    <section class="panel panel--scrollable" id="p-team" aria-label="Our team">
+      <div class="panel-inner">
+        <div class="team-intro">
+          <span class="eyebrow r-up">The People Behind the Name</span>
+          <h2 class="section-title r-up d1">Meet Our <em>Team</em></h2>
+          <div class="divider-line" style="margin:0 auto 16px;"></div>
+          <p class="section-desc r-up d2" style="margin:0 auto;">
+            Our advisors bring decades of combined experience and a genuine passion
+            for connecting people with extraordinary properties.
+          </p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card r-up d1">
+            <div class="team-avatar">👩</div>
+            <div class="team-name">Alexandra Mercer</div>
+            <div class="team-role">Founder &amp; Principal</div>
+            <p class="team-bio">20 years shaping luxury real estate markets across the Asia-Pacific region. Alexandra's vision defines everything we do.</p>
+          </div>
+          <div class="team-card r-up d2">
+            <div class="team-avatar">👨</div>
+            <div class="team-name">James Thornton</div>
+            <div class="team-role">Senior Property Advisor</div>
+            <p class="team-bio">Specialising in waterfront and prestige residential properties, James is known for his meticulous attention to detail.</p>
+          </div>
+          <div class="team-card r-up d3">
+            <div class="team-avatar">👩</div>
+            <div class="team-name">Priya Nair</div>
+            <div class="team-role">Commercial Specialist</div>
+            <p class="team-bio">A trusted voice in commercial real estate, Priya has facilitated over $500M in commercial transactions over her career.</p>
+          </div>
+          <div class="team-card r-up d4">
+            <div class="team-avatar">👨</div>
+            <div class="team-name">Daniel Cho</div>
+            <div class="team-role">Client Relations Manager</div>
+            <p class="team-bio">Daniel ensures every client experience is seamless — from first contact through to long after the keys are handed over.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▌PANEL 5 — CONTACT (inner scroll) ▐ -->
+    <section class="panel panel--scrollable" id="p-contact" aria-label="Contact us">
+      <div class="panel-inner">
+        <div class="contact-grid">
+
+          <div class="r-left">
+            <span class="eyebrow">Get in Touch</span>
+            <h2 class="section-title">Let's Find Your <em>Next Property</em></h2>
+            <div class="divider-line"></div>
+            <p class="section-desc">
+              Whether you're buying, selling, or simply exploring — our advisors are
+              here to guide you with clarity and confidence.
+            </p>
+            <div class="contact-info">
+              <div class="contact-item r-up d1">
+                <div class="contact-icon">📍</div>
+                <div>
+                  <div class="contact-label">Office</div>
+                  <div class="contact-val">Level 32, 1 Market Street<br>Sydney NSW 2000, Australia</div>
+                </div>
+              </div>
+              <div class="contact-item r-up d2">
+                <div class="contact-icon">📞</div>
+                <div>
+                  <div class="contact-label">Phone</div>
+                  <div class="contact-val">+61 2 9000 0000</div>
+                </div>
+              </div>
+              <div class="contact-item r-up d3">
+                <div class="contact-icon">✉️</div>
+                <div>
+                  <div class="contact-label">Email</div>
+                  <div class="contact-val">hello@prestigerealty.com.au</div>
+                </div>
+              </div>
+              <div class="contact-item r-up d4">
+                <div class="contact-icon">🕐</div>
+                <div>
+                  <div class="contact-label">Hours</div>
+                  <div class="contact-val">Mon – Fri: 9:00 AM – 6:00 PM<br>Sat: 10:00 AM – 4:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-right">
+            <div class="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fname">First Name</label>
+                  <input id="fname" type="text" placeholder="Alexandra" />
+                </div>
+                <div class="form-group">
+                  <label for="lname">Last Name</label>
+                  <input id="lname" type="text" placeholder="Mercer" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input id="phone" type="tel" placeholder="+61 4XX XXX XXX" />
+              </div>
+              <div class="form-group">
+                <label for="interest">I'm interested in</label>
+                <select id="interest">
+                  <option>Buying a property</option>
+                  <option>Selling my property</option>
+                  <option>Leasing a property</option>
+                  <option>Commercial real estate</option>
+                  <option>General enquiry</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="msg">Message</label>
+                <textarea id="msg" placeholder="Tell us a little about what you're looking for…"></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="form-btn" onclick="submitForm('email')">
+                  <span>✉ Send via Email</span>
+                </button>
+                <button class="form-btn form-btn--wa" onclick="submitForm('whatsapp')">
+                  <span>💬 Send via WhatsApp</span>
+                </button>
+              </div>
+              <div class="form-success" id="form-success">
+                ✦ Thank you — one of our advisors will be in touch within 24 hours.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ▌PANEL 6 — FOOTER ▐ -->
+    <footer class="panel" id="p-footer" aria-label="Footer">
+      <div class="footer-body">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo" data-panel="0">Prestige Realty</a>
+          <p class="footer-tagline">Representing the finest properties for the most discerning clients.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Properties</h5>
+          <ul>
+            <li><a href="#" data-panel="2">Coming Soon</a></li>
+            <li><a href="#" data-panel="2">Join Waitlist</a></li>
+            <li><a href="#" data-panel="5">Register Interest</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#" data-panel="3">About Us</a></li>
+            <li><a href="#" data-panel="4">Our Team</a></li>
+            <li><a href="#" data-panel="5">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Prestige Realty. All rights reserved.</p>
+        <p class="footer-copy">Privacy Policy · Terms of Use</p>
+      </div>
+    </footer>
+
+  </div><!-- end #snap-wrap -->
+
+  <script src="main.js" defer></script>
+</body>
+</html>
